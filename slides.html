@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Paolo Masulli" />
+  <title>Using R (and friends) in maths</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!-- configuration parameters -->
+  <meta name="defaultView" content="slideshow" />
+  <meta name="controlVis" content="hidden" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <!-- style sheet links -->
+  <link rel="stylesheet" href="s5/default/slides.css" type="text/css" media="projection" id="slideProj" />
+  <link rel="stylesheet" href="s5/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+  <link rel="stylesheet" href="s5/default/print.css" type="text/css" media="print" id="slidePrint" />
+  <link rel="stylesheet" href="s5/default/opera.css" type="text/css" media="projection" id="operaFix" />
+  <!-- S5 JS -->
+  <script src="s5/default/slides.js" type="text/javascript"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header"></div>
+<div id="footer">
+  <h1>QGM Friday Lunch Seminar, 27 June 2014</h1>
+  <h2>Using R (and friends) in maths</h2>
+</div>
+</div>
+<div class="presentation">
+<div class="titleslide slide">
+  <h1>Using R (and friends) in maths</h1>
+  <h2>Paolo Masulli</h2>
+  <h3>QGM Friday Lunch Seminar, 27 June 2014</h3>
+</div>
+<div id="what-are-we-talking-about" class="slide section level1">
+<h1>What are we talking about?</h1>
+<ul class="incremental">
+<li><a href="http://www.r-project.org/">R</a> is a free software programming language</li>
+<li>Very good for handling <em>data-sets</em>, making <em>plots</em>, <em>presenting results</em>, …</li>
+<li>Easy to learn</li>
+<li>A LOT of packages available</li>
+<li>Nice IDE and editor: <a href="http://www.rstudio.org/">RStudio</a></li>
+</ul>
+</div>
+<div id="quick-examples" class="slide section level1">
+<h1>Quick examples</h1>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">6</span> <span class="co"># range of integers</span>
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)
+x^<span class="dv">2</span></code></pre>
+<pre><code>## [1]  1  4  9 16 25 36</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sin</span>(x)</code></pre>
+<pre><code>## [1]  0.8415  0.9093  0.1411 -0.7568 -0.9589 -0.2794</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x+y</code></pre>
+<pre><code>## [1] 2 4 4 6 6 8</code></pre>
+</div>
+<div id="did-you-say-plots" class="slide section level1">
+<h1>Did you say plots?</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">qplot</span>(speed, dist, <span class="dt">data =</span> cars) +<span class="st"> </span><span class="kw">geom_smooth</span>()</code></pre>
+<div class="figure">
+<img src="figure/graphics.png" alt="A scatterplot of cars" /><p class="caption">A scatterplot of <code>cars</code></p>
+</div>
+</div>
+<div id="arc-diagrams" class="slide section level1">
+<h1>Arc diagrams</h1>
+<p>We can draw arc diagrams for RNA secondary structure, defining them as parenthesized strings (e.g. ((..().)))</p>
+<div class="figure">
+<img src="figure/unnamed-chunk-1.png" alt="Arc diagram" /><p class="caption">Arc diagram</p>
+</div>
+</div>
+<div id="presenting-data-and-results-r-markdown" class="slide section level1">
+<h1>Presenting data and results: R Markdown</h1>
+<ul class="incremental">
+<li>It’s a plain text formatting syntax, like a simplified HTML.</li>
+<li>Easier than LaTeX. Far fewer commands to remember, e.g. to write bullet points, just begin with a dash “<code>-</code>” instead of <code>\begin{itemize}</code> and <code>\item</code>;</li>
+<li>It can include LaTeX code e.g. <span class="math">\(f(k)={n \choose k}p^{k}(1-p)^{n-k}\)</span></li>
+<li>It can include R code which gets executed when transforming the R Markdown into HTML/PDF/slides. (using <code>knitr</code>). It takes one click.</li>
+</ul>
+</div>
+<div id="example-workflow" class="slide section level1">
+<h1>Example workflow</h1>
+<div class="figure">
+<img src="figure/workflow.png" />
+</div>
+</div>
+<div id="example-this-presentation" class="slide section level1">
+<h1>Example: this presentation</h1>
+<ul class="incremental">
+<li>This presentation was written in R Markdown.</li>
+<li>Let’s peek at the <a href="R_in_maths.Rmd">source code</a>.</li>
+</ul>
+</div>
+<div id="example-outputs" class="slide section level1">
+<h1>Example outputs</h1>
+<p>I can transform my presentation in different formats using <a href="http://yihui.name/knitr/">knitr</a>, <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> and other commands - <a href="R_in_maths.html">HTML</a> - <a href="R_in_maths.pdf">PDF</a></p>
+</div>
+<div id="eye-candy" class="slide section level1">
+<h1>Eye-candy</h1>
+<p>A different kind of plot: <a href="choropleth_county.png">pollution in the US</a> (Source: Kamal, Exploratory Data Analysis Coursera class, May 2014)</p>
+</div>
+</div>
+</body>
+</html>

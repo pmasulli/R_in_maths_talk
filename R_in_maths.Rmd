@@ -1,0 +1,74 @@
+% Using R (and friends) in maths
+% Paolo Masulli
+% QGM Friday Lunch Seminar, 27 June 2014
+
+```{r setup, include=FALSE}
+# set global chunk options
+opts_chunk$set(cache=TRUE)
+```
+
+# What are we talking about?
+
+- [R](http://www.r-project.org/) is a free software programming language
+- Very good for handling *data-sets*, making *plots*, *presenting results*, ...
+- Easy to learn
+- A LOT of packages available
+- Nice IDE and editor: [RStudio](http://www.rstudio.org/)
+
+
+# Quick examples
+
+```{r quick-examples}
+x <- 1:6 # range of integers
+y <- c(1,2)
+x^2
+sin(x)
+x+y
+```
+
+# Did you say plots?
+
+```{r graphics, message=FALSE, fig.cap='A scatterplot of `cars`', fig.width=11, fig.height=5}
+library(ggplot2)
+qplot(speed, dist, data = cars) + geom_smooth()
+```
+
+# Arc diagrams
+
+We can draw arc diagrams for RNA secondary structure, defining them as parenthesized strings (e.g. ((..().)))
+
+```{r echo=FALSE, fig.width=11, fig.height=5, fig.cap='Arc diagram'}
+library(png)
+library(grid)
+img <- readPNG("figure/rchie.png")
+ grid.raster(img)
+```
+
+
+# Presenting data and results: R Markdown
+
+- It's a plain text formatting syntax, like a simplified HTML.
+- Easier than LaTeX. Far fewer commands to remember, e.g. to write bullet points, just begin with a dash "`-`" instead of `\begin{itemize}` and `\item`;
+- It can include LaTeX code e.g. 
+$f(k)={n \choose k}p^{k}(1-p)^{n-k}$
+- It can include R code which gets executed when transforming the R Markdown into HTML/PDF/slides. (using `knitr`). It takes one click.
+
+# Example workflow
+
+![](figure/workflow.png)
+
+
+# Example: this presentation
+
+- This presentation was written in R Markdown.
+- Let's peek at the [source code](R_in_maths.Rmd).
+
+# Example outputs
+
+ I can transform my presentation in different formats using [knitr](http://yihui.name/knitr/), [pandoc](http://johnmacfarlane.net/pandoc/) and other commands 
+- [HTML](R_in_maths.html)
+- [PDF](R_in_maths.pdf)
+
+# Eye-candy
+
+A different kind of plot: [pollution in the US](choropleth_county.png) (Source: Kamal, Exploratory Data Analysis Coursera class, May 2014)
